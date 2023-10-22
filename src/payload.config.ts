@@ -1,26 +1,28 @@
-import { payloadCloud } from '@payloadcms/plugin-cloud';
-import path from 'path';
 import { buildConfig } from 'payload/config';
 import Categories from './collections/Categories';
 import Posts from './collections/Posts';
 import Users from './collections/Users';
+import { viteBundler } from '@payloadcms/bundler-vite';
+import { webpackBundler } from '@payloadcms/bundler-webpack';
+import {
+  SlateToLexicalFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical';
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
 
 export default buildConfig({
   admin: {
+    bundler: webpackBundler(),
     user: Users.slug,
   },
-  collections: [
-    Users,
-    Categories,
-    Posts,
-  ],
-  typescript: {
-    outputFile: path.resolve(__dirname, 'payload-types.ts'),
-  },
-  graphQL: {
-    schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
-  },
-  plugins: [
-    payloadCloud()
-  ]
+  db: mongooseAdapter({
+    url: process.env.MONGODB_URI,
+  }),
+  collections: [Users, Categories, Posts],
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      SlateToLexicalFeature(),
+    ],
+  }),
 });
