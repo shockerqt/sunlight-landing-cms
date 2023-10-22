@@ -3,7 +3,6 @@ import Categories from './collections/Categories';
 import Posts from './collections/Posts';
 import Users from './collections/Users';
 import { viteBundler } from '@payloadcms/bundler-vite';
-import { webpackBundler } from '@payloadcms/bundler-webpack';
 import {
   SlateToLexicalFeature,
   lexicalEditor,
@@ -12,7 +11,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb';
 
 export default buildConfig({
   admin: {
-    bundler: webpackBundler(),
+    bundler: viteBundler(),
     user: Users.slug,
   },
   db: mongooseAdapter({
