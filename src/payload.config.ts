@@ -10,6 +10,7 @@ import {
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 
 export default buildConfig({
+  cors: '*',
   admin: {
     bundler: viteBundler(),
     user: Users.slug,

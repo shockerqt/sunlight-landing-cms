@@ -2,6 +2,9 @@ import { CollectionConfig } from 'payload/types';
 
 const Posts: CollectionConfig = {
   slug: 'posts',
+  access: {
+    read: () => true,
+  },
   versions: {
     drafts: true,
   },
