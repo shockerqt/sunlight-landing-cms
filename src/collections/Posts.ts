@@ -13,6 +13,11 @@ const Posts: CollectionConfig = {
   },
   fields: [
     {
+      name: 'slug',
+      type: 'text',
+      required: true,
+    },
+    {
       name: 'category',
       type: 'relationship',
       relationTo: 'categories',
@@ -25,6 +30,11 @@ const Posts: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
+      required: true,
+    },
+    {
+      name: 'description',
+      type: 'textarea',
       required: true,
     },
     {
